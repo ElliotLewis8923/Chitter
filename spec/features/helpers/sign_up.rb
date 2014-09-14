@@ -5,3 +5,9 @@ def sign_up
 	fill_in :username, :with => 'hashswagbrolo'
 	click_button 'Sign up'
 end
+
+def sign_in
+	fill_in :email_login, :with => 'test@test.com'
+	fill_in :password_login, :with => 'password_test'
+	click_button 'Sign in'
+end
