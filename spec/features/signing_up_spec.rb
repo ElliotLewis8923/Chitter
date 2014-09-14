@@ -7,4 +7,13 @@ feature "In order to use chitter as a maker I want to sign up to the service" do
 		click_link('Sign up!')
 		expect(page).to have_content('Please enter your details.')
 	end
+
+	scenario 'signing up' do
+		visit 'user/sign_up'
+		fill_in :email, :with => email
+		fill_in :password, :with => password
+		fill_in :password_confirmation, :with => password_confirmation
+		click_button "Sign up"
+		expect(User.count).to be > 0
+
 end
