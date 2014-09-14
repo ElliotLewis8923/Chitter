@@ -14,7 +14,7 @@ feature "In order to use chitter as a maker I want to sign up to the service" do
 		fill_in :password, :with => 'password_test'
 		fill_in :password_confirmation, :with => 'password_test'
 		click_button "Sign up"
-		expect(User.count).to be > 0
+		expect(User.count).to eq 1
 	end
 
 end

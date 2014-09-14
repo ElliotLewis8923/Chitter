@@ -15,7 +15,7 @@ Capybara.app = Server
 
 RSpec.configure do |config|
 
-=begin
+
  config.filter_run :focus
  config.run_all_when_everything_filtered = true
 
@@ -31,7 +31,7 @@ RSpec.configure do |config|
   config.after(:each) do
     DatabaseCleaner.clean
   end
-=end
+
 end
 
 
