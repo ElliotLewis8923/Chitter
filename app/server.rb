@@ -13,7 +13,11 @@ class Server < Sinatra::Base
 	DataMapper.auto_upgrade!
 
   get '/' do
-    'Hello server.rb!'
+    erb :index
+  end
+
+  get '/user/sign_up' do
+  	erb :sign_up
   end
 
   # start the server if ruby file executed directly
