@@ -3,6 +3,7 @@ ENV["RACK_ENV"] = 'test'
 require 'capybara/rspec'
 require 'database_cleaner'
 require './app/server'
+require './spec/features/helpers/sign_up'
 
 
 

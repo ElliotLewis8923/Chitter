@@ -15,17 +15,18 @@ class Server < Sinatra::Base
 	DataMapper.auto_upgrade!
 
   get '/' do
+  	@user = session[:id]
     erb :index
   end
 
-  get '/user/sign_up' do
-  	erb :sign_up
-  end
-
-  post '/user/sign_up' do
+  post '/' do
   	User.create(:email => params[:email],
   							:password => params[:password],
-  							:password_confirmation => params[:password_confirmation])
+  							:password_confirmation => params[:password_confirmation],
+  							:username => params[:username])
+  	session[:id] = User.first(:email => params[:email])
+  	@user = session[:id]
+  	erb :index
   end
 
   # start the server if ruby file executed directly

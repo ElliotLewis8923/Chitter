@@ -11,6 +11,7 @@ class User
 
 		property :id, Serial
 		property :email, String, :unique => true, :message => "Sorry, this email has already been taken."
+		property :username, String, :unique => true, :message => "Sorry, this username has already been taken."
 		property :password_digest, Text, :lazy => false
 		property :password_token, Text, :lazy => false
 		property :password_token_timestamp, Text, :lazy => false
