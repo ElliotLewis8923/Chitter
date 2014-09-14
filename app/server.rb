@@ -5,6 +5,8 @@ require 'rack-flash'
 
 require_relative './models/user'
 
+
+
 class Server < Sinatra::Base
 
 	enable :sessions
@@ -18,10 +20,13 @@ class Server < Sinatra::Base
 
 	DataMapper.auto_upgrade!
 
+	use Rack::MethodOverride
+
 	use Rack::Flash
 
+ 
+
   get '/' do
-  	@user = session[:id]
     erb :index
   end
 
@@ -40,15 +45,24 @@ class Server < Sinatra::Base
 	  end
   end
 
-  post '/login' do
+  delete '/sessions' do
+  	session[:id] = nil
+  	redirect to '/'
+	end
+
+  post '/sessions/new' do
   	login = User.authenticate(params[:email_login], params[:password_login])
   	if login
-  		session[:id] = User.first(:email => params[:email_login])
+  		session[:id] = User.first(:email => params[:email_login]).id
   		redirect to '/'
  		else
  			flash[:notice] = "Sorry, your login details could not be found on our database."
  		end
  	end
+
+ 	def current_user
+			@current_user ||=User.get(session[:id]) if session[:id]
+	end
 
 
   # start the server if ruby file executed directly

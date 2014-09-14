@@ -1,6 +1,10 @@
-<% if @user %>
+<% if current_user %>
 <% then %>
-Welcome, <%= @user.username %>!
+Welcome, <%= current_user.username %>!
+<form method='post' action='/sessions'>
+	<input type='hidden' name='_method' value='delete'>
+	<input type='submit' value='Sign out'>
+</form>
 <% else %>
 Don't have an account? Enter your details to sign up.
 <form action='/' method='post'>
@@ -10,7 +14,7 @@ Don't have an account? Enter your details to sign up.
 	Username: <input type='text' name='username'>
 	<input type='submit' value='Sign up'>
 </form>
-<form action='/login' method='post'>
+<form action='/sessions/new' method='post'>
 Already a registered user? Sign in here.
 Email: <input type='text' name='email_login'>
 Password: <input type='password' name='password_login'>
