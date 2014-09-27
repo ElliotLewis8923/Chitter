@@ -4,6 +4,7 @@ require 'data_mapper'
 require 'rack-flash'
 
 require_relative './models/user'
+require_relative './models/peep'
 
 
 
@@ -11,6 +12,7 @@ class Server < Sinatra::Base
 
 	enable :sessions
 	set :session_secret, 'super secret'
+	set :partial_template_engine, :erb
 
 	env = ENV['RACK_ENV'] || 'development'
 
@@ -35,8 +37,6 @@ class Server < Sinatra::Base
   										:password => params[:password],
   										:password_confirmation => params[:password_confirmation],
   										:username => params[:username])
-  	@user = session[:id]
-  	
 	  if @account.save
 	  	#session[:id] = User.first(:email => params[:email])
 	  	erb :index
@@ -59,6 +59,15 @@ class Server < Sinatra::Base
  			flash[:notice] = "Sorry, your login details could not be found on our database."
  		end
  	end
+
+  post '/peep' do
+    text = params[:text]
+    hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten
+    peep = Peep.new( :user => session[:id],
+                      :text => text,
+                      :hashtags => hashtags)
+    redirect to '/'
+  end
 
  	def current_user
 			@current_user ||=User.get(session[:id]) if session[:id]

@@ -9,6 +9,8 @@ class User
 
 		validates_confirmation_of :password, :message => "Sorry, your passwords don't match."
 
+		has n, :peeps, :through => Resource
+
 		property :id, Serial
 		property :email, String, :unique => true, :message => "Sorry, this email has already been taken."
 		property :username, String, :unique => true, :message => "Sorry, this username has already been taken."
