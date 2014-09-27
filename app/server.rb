@@ -75,8 +75,9 @@ class Server < Sinatra::Base
 	end
 
   def parse_hashtags(peep)
+    @peep = peep
     text = peep.text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!
-    text ? ( text.map { |e| Hashtag.create(:name => e, :peeps => [peep]) } ) :
+    text ? ( text.map { |e| h = h = Hashtag.first_or_create(:name => e), h.peeps = [@peep] } ) :
     nil
   end
 
