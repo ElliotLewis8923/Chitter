@@ -1,17 +1,32 @@
 <% if current_user %>
 <% then %>
-Welcome, <%= current_user.username %>!
-<form method='post' action='/sessions'>
-	<input type='hidden' name='_method' value='delete'>
-	<input type='submit' value='Sign out'>
-</form>
-<form method='post' action='/peep'>
- <input type='text' name='peep' size='140' value='Post a peep!'>
- <input type='submit' value='Post your peep!'>
-
- </form>
+<h2>Welcome, <%= current_user.username %>!</h2>
+<section class='form' id='sign-out'>
+	<form method='post' action='/sessions'>
+		<input type='hidden' name='_method' value='delete'>
+		<input type='submit' value='Sign out'>
+	</form>
+</section>
+<section class='form' id='submit-peep'>
+	<form method='post' action='/peep'>
+	 <input type='text' name='peep' size='140' value='Post a peep!'>
+	 <input type='submit' value='Post your peep!'>
+	</form>
+ </section>
+ <section id='list-peeps'>
+ 	<ul>
+ 		<%= @peeps.each do |peep| %>
+ 			<article id='each-peep'>
+	 			<li>
+	 				<h1><% peep.user.name %></h1>
+	 					<p><% peep.text %></p>
+	 			</li>
+	 		</article>
+	 	<% end %>
+	 </ul>
+	</section>
 <% else %>
-Don't have an account? Enter your details to sign up.
+<p>Don't have an account? Enter your details to sign up.</p>
 <form action='/' method='post'>
 	Email: <input type='text' name='email'>
 	Password: <input type='password' name='password'>

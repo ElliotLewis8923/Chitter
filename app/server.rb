@@ -29,6 +29,8 @@ class Server < Sinatra::Base
  
 
   get '/' do
+    @peeps = Peep.all
+    puts Peep.all
     erb :index
   end
 
