@@ -4,6 +4,7 @@ require 'capybara/rspec'
 require 'database_cleaner'
 require './app/server'
 require './spec/features/helpers/sign_up'
+require './spec/features/helpers/post_peep'
 require 'rack-flash'
 
 
