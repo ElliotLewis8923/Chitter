@@ -62,17 +62,22 @@ class Server < Sinatra::Base
 
   post '/peep' do
     text = params[:peep]
-    
-    peep = Peep.create( :user => User.get(session[:id]),
+    @peep = Peep.create( :user => User.get(session[:id]),
                      :text => text)
-    puts 'yo'
-   # hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!.map { |e| Hashtag.new(:name => e, :peeps => peep) }
+    parse_hashtags(@peep)
+    #hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!.map { |e| Hashtag.create(:name => e, :peeps => [@peep]) }
     redirect to '/'
+    
   end
 
  	def current_user
 			@current_user ||=User.get(session[:id]) if session[:id]
 	end
+
+  def parse_hashtags(peep)
+    text = peep.text
+    text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!.map { |e| Hashtag.create(:name => e, :peeps => [peep]) }
+  end
 
 
   # start the server if ruby file executed directly
