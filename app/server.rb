@@ -5,7 +5,7 @@ require 'rack-flash'
 
 require_relative './models/user'
 require_relative './models/peep'
-
+require_relative './models/hashtag'
 
 
 class Server < Sinatra::Base
@@ -61,11 +61,12 @@ class Server < Sinatra::Base
  	end
 
   post '/peep' do
-    text = params[:text]
-    hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten
-    peep = Peep.new( :user => session[:id],
-                      :text => text,
-                      :hashtags => hashtags)
+    text = params[:peep]
+    
+    peep = Peep.create( :user => User.get(session[:id]),
+                     :text => text)
+    puts 'yo'
+   # hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!.map { |e| Hashtag.new(:name => e, :peeps => peep) }
     redirect to '/'
   end
 

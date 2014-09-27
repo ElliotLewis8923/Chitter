@@ -8,6 +8,7 @@ feature "In order to let people know what I am doing as a maker I want to post a
 		sign_in
 		find_field('peep')
 		fill_in :peep, :with => "first peep yo #peepsgottapeep #carpediem"
+		click_button 'Post your peep!'
 		expect(Peep.count).to eq 1
 	end
 
