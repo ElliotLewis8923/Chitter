@@ -66,7 +66,6 @@ class Server < Sinatra::Base
     text = params[:peep]
     time = Time.now
     time = time.strftime("Posted at %H:%M, on %d/%m/%Y")
-    puts time
     @peep = Peep.create( :user => User.get(session[:id]),
                          :text => text,
                          :time => time)

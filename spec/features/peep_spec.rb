@@ -46,7 +46,7 @@ feature "In order to let people know what I am doing as a maker I want to post a
 
 	scenario "Each peep has a timestamp" do
 		visit '/'
-		message = "why oh why am i still working on fucking chitter"
+		message = "why oh why am i still working on fucking #chitter"
 		sign_up
 		sign_in
 		post_peep(message)
@@ -57,14 +57,15 @@ end
 
 feature "In order to see what people have to say as a maker I want to see all peeps in chronological order" do
 
-	xscenario "The homepage displays peeps" do
+	scenario "The homepage displays peeps" do
 		visit '/'
-		message1 = "asdf"
-		message2 = "why am i still working on chitter"
+		message1 = "ohman"
+		message2 = "sigh..."
 		sign_up
 		sign_in
 		post_peep(message1)
 		post_peep(message2)
+		expect(find('article:nth-child(1)')).to have_content("sigh...")
 	end
 
 
