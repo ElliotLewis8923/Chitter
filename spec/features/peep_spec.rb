@@ -44,4 +44,32 @@ feature "In order to let people know what I am doing as a maker I want to post a
 		expect(user.peeps.count).to eq 2
 	end
 
+	scenario "Each peep has a timestamp" do
+		visit '/'
+		message = "why oh why am i still working on fucking chitter"
+		sign_up
+		sign_in
+		post_peep(message)
+		expect(Peep.time.class).to eq DataMapper::Property::String
+	end
+
 end
+
+feature "In order to see what people have to say as a maker I want to see all peeps in chronological order" do
+
+	xscenario "The homepage displays peeps" do
+		visit '/'
+		message1 = "asdf"
+		message2 = "why am i still working on chitter"
+		sign_up
+		sign_in
+		post_peep(message1)
+		post_peep(message2)
+	end
+
+
+end
+
+
+
+

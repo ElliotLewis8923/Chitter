@@ -7,5 +7,6 @@ class Peep
 
 	property :id, Serial
 	property :text, Text, :lazy => false
+	property :time, String
 
 end

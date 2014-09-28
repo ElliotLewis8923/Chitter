@@ -30,6 +30,7 @@ class Server < Sinatra::Base
 
   get '/' do
     @peeps = Peep.all
+    @peeps.reverse!
     erb :index
   end
 
@@ -63,8 +64,12 @@ class Server < Sinatra::Base
 
   post '/peep' do
     text = params[:peep]
+    time = Time.now
+    time = time.strftime("Posted at %H:%M, on %d/%m/%Y")
+    puts time
     @peep = Peep.create( :user => User.get(session[:id]),
-                     :text => text)
+                         :text => text,
+                         :time => time)
     parse_hashtags(@peep)
     redirect to '/'
   end
