@@ -4,9 +4,8 @@ class Peep
 
 	has 1, :user, :through => Resource
 	has n, :hashtags, :through => Resource
-	has n, :peeps, :through => Resource
 
 	property :id, Serial
-	property :text, String
+	property :text, Text, :lazy => false
 
 end

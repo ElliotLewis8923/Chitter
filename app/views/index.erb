@@ -15,11 +15,11 @@
  </section>
  <section id='list-peeps'>
  	<ul>
- 		<%= @peeps.each do |peep| %>
+ 		<% @peeps.each do |peep| %>
  			<article id='each-peep'>
 	 			<li>
-	 				<h1><% peep.user.name %></h1>
-	 					<p><% peep.text %></p>
+	 				<h1><%= peep.user.username %>:</h1>
+	 					<p><%= peep.text %></p>
 	 			</li>
 	 		</article>
 	 	<% end %>

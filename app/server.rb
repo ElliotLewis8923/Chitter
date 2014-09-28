@@ -30,7 +30,6 @@ class Server < Sinatra::Base
 
   get '/' do
     @peeps = Peep.all
-    puts Peep.all
     erb :index
   end
 
@@ -67,9 +66,7 @@ class Server < Sinatra::Base
     @peep = Peep.create( :user => User.get(session[:id]),
                      :text => text)
     parse_hashtags(@peep)
-    #hashtags = text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!.map { |e| Hashtag.create(:name => e, :peeps => [@peep]) }
     redirect to '/'
-    
   end
 
  	def current_user

@@ -32,4 +32,16 @@ feature "In order to let people know what I am doing as a maker I want to post a
 		expect(Peep.count).to eq 2
 	end
 
+	scenario "User has multiple peeps" do
+		visit '/'
+		message1 = "asdf"
+		message2 = "why am i still working on chitter"
+		sign_up
+		sign_in
+		post_peep(message1)
+		post_peep(message2)
+		user = User.first(:email => 'test@test.com')
+		expect(user.peeps.count).to eq 2
+	end
+
 end
