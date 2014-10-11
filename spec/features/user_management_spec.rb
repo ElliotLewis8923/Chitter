@@ -28,7 +28,6 @@ feature "In order to avoid others to use my account as a maker I want to log out
 		sign_up
 		click_button('Sign out')
 		expect(page).to have_content("Don't have an account? Enter your details to sign up.")
-
 	end
 
 end

@@ -53,8 +53,16 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		expect(find('article:nth-child(1)')).to have_content("sigh...")
 	end
 
-	scenario "Only peeps authored by a specific user are displayed" do
-		
+	scenario "Only peeps authoured by a specific user are displayed" do
+		visit '/'
+		sign_up
+		post_peep("asfasfd")
+		sign_out
+		sign_up2
+		post_peep("aaaaaaaargh")
+		click_link "hashswagbrolo"
+		expect(page).to have_content "asfasfd"
+		expect(page).not_to have_content "aaaaaaaargh"
 	end
 
 

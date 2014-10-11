@@ -5,12 +5,13 @@ require 'database_cleaner'
 require './app/server'
 require './spec/features/helpers/sign_up'
 require './spec/features/helpers/post_peep'
+require './spec/features/helpers/sign_out'
 require 'rack-flash'
 
 
-
-
+DataMapper.finalize.auto_migrate!
 DataMapper.auto_upgrade!
+
 
 Capybara.app = Server
 

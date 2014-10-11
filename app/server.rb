@@ -3,8 +3,8 @@ require 'capybara/rspec'
 require 'data_mapper'
 require 'rack-flash'
 
-require_relative './models/user'
 require_relative './models/peep'
+require_relative './models/user'
 require_relative './models/hashtag'
 
 
@@ -67,10 +67,17 @@ class Server < Sinatra::Base
     time = Time.now
     time = time.strftime("Posted at %H:%M, on %d/%m/%Y")
     @peep = Peep.create( :user => User.get(session[:id]),
+                         :user_id => session[:id],
                          :text => text,
                          :time => time)
     parse_hashtags(@peep)
     redirect to '/'
+  end
+
+  get '/users/search/:username' do
+     @user = User.first(:username => params[:username])
+     @peeps = Peep.all(:user_id => @user.id)
+     erb :index
   end
 
  	def current_user

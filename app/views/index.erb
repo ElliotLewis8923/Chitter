@@ -10,7 +10,7 @@
  			<article class='each-peep'>
 	 			<li>
 	 				<h1></h1>
-	 					<%= peep.user.username %>:
+	 					<a href="/users/search/<%= peep.user.username %>"><%= peep.user.username %>:</a>
 	 					<%= peep.text %>
 	 					<em><%= peep.time %></em>
 	 			</li>
