@@ -16,7 +16,6 @@ feature "In order to user chitter as a maker I want to log in" do
 	scenario 'signing in' do
 		visit '/'
 		sign_up
-		sign_in
 		expect(page).to have_content('Welcome, hashswagbrolo!')
 	end
 
@@ -27,7 +26,6 @@ feature "In order to avoid others to use my account as a maker I want to log out
 	scenario 'logging out' do
 		visit '/'
 		sign_up
-		sign_in
 		click_button('Sign out')
 		expect(page).to have_content("Don't have an account? Enter your details to sign up.")
 
