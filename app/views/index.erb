@@ -1,44 +1,20 @@
 <% if current_user %>
-<% then %>
-<h2>Welcome, <%= current_user.username %>!</h2>
-<section class='form' id='sign-out'>
-	<form method='post' action='/sessions'>
-		<input type='hidden' name='_method' value='delete'>
-		<input type='submit' value='Sign out'>
+	<form method='post' action='/peep' class='peep-form'>
+		<input type='text' name='peep' size='100' value='Post a peep!'>
+		<input type='submit' value='Post your peep!'>
 	</form>
-</section>
-<section class='form' id='submit-peep'>
-	<form method='post' action='/peep'>
-	 <input type='text' name='peep' size='140' value='Post a peep!'>
-	 <input type='submit' value='Post your peep!'>
-	</form>
- </section>
- <section id='list-peeps'>
+<% end %>
+ <main id='list-peeps'>
  	<ul>
  		<% @peeps.each do |peep| %>
- 			<article id='each-peep'>
+ 			<article class='each-peep'>
 	 			<li>
-	 				<h1><%= peep.user.username %>:</h1>
-	 					<p><%= peep.text %></p>
-	 					<p><%= peep.time %></p>
+	 				<h1></h1>
+	 					<%= peep.user.username %>:
+	 					<%= peep.text %>
+	 					<em><%= peep.time %></em>
 	 			</li>
 	 		</article>
 	 	<% end %>
 	 </ul>
-	</section>
-<% else %>
-<p>Don't have an account? Enter your details to sign up.</p>
-<form action='/' method='post'>
-	Email: <input type='text' name='email'>
-	Password: <input type='password' name='password'>
-	Confirm password: <input type='password' name='password_confirmation'>
-	Username: <input type='text' name='username'>
-	<input type='submit' value='Sign up'>
-</form>
-<form action='/sessions/new' method='post'>
-Already a registered user? Sign in here.
-Email: <input type='text' name='email_login'>
-Password: <input type='password' name='password_login'>
-<input type='submit' value='Sign in'>
-</form>
-<% end %>
+</main>

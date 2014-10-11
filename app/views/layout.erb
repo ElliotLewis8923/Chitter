@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="/css/application.css" type="text/css">
+	<title>Chitter</title>
+</head>
+<header>
+	<% if current_user %>
+		<h2>Welcome, <%= current_user.username %>!</h2>
+		<form method='post' action='/sessions' class='signout-form'>
+			<input type='hidden' name='_method' value='delete'>
+			<input type='submit' value='Sign out'>
+		</form>
+	<% else %>
+		Don't have an account? Enter your details to sign up.</p>
+		<aside class='forms' id='session-forms'>
+			<form action='/' method='post' class='signup'>
+				Email: <input type='text' name='email'>
+				Password: <input type='password' name='password'>
+				Confirm password: <input type='password' name='password_confirmation'>
+				Username: <input type='text' name='username'>
+				<input type='submit' value='Sign up'>
+			</form>
+			<form action='/sessions/new' method='post' class='signin-form'>
+				Already a registered user? Sign in here.
+				Email: <input type='text' name='email_login'>
+				Password: <input type='password' name='password_login'>
+				<input type='submit' value='Sign in'>
+			</form>
+		</aside>
+	<% end %>
+</header>
+<body>
+<%= yield %>
+</body>
+</html>
+

@@ -40,8 +40,8 @@ class Server < Sinatra::Base
   										:password_confirmation => params[:password_confirmation],
   										:username => params[:username])
 	  if @account.save
-	  	#session[:id] = User.first(:email => params[:email])
-	  	erb :index
+	  	session[:id] = @account.id
+	  	redirect to '/'
 	  else
 	  	flash.now[:errors] = @account.errors.full_messages
 	  end
