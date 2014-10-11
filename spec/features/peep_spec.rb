@@ -4,47 +4,40 @@ feature "In order to let people know what I am doing as a maker I want to post a
 
 	scenario "Post a peep" do
 		visit '/'
-		message = "first peep yo"
 		sign_up
-		post_peep(message)
+		post_peep("first peep yo")
 		expect(Peep.count).to eq 1
 	end
 
 	scenario "Peep has multiple hashtags" do
 		visit '/'
-		message = "second peep yo #peepsgottapeep #carpediem"
 		sign_up
-		post_peep(message)
+		post_peep("second peep yo #peepsgottapeep #carpediem")
 		expect(Hashtag.count).to eq 2
 	end
 
 	scenario "Hashtag has multiple peeps" do
 		visit '/'
-		message1 = "peeping tom #brolo"
-		message2 = "asdf #brolo"
 		sign_up
-		post_peep(message1)
-		post_peep(message2)
+		post_peep("peeping tom #brolo")
+		post_peep("asdf #brolo")
 		expect(Hashtag.count).to eq 1
 		expect(Peep.count).to eq 2
 	end
 
 	scenario "User has multiple peeps" do
 		visit '/'
-		message1 = "asdf"
-		message2 = "why am i still working on chitter"
 		sign_up
-		post_peep(message1)
-		post_peep(message2)
+		post_peep("asdf")
+		post_peep("why am i still working on chitter")
 		user = User.first(:email => 'test@test.com')
 		expect(user.peeps.count).to eq 2
 	end
 
 	scenario "Each peep has a timestamp" do
 		visit '/'
-		message = "why oh why am i still working on fucking #chitter"
 		sign_up
-		post_peep(message)
+		post_peep("why oh why am i still working on fucking #chitter")
 		expect(Peep.time.class).to eq DataMapper::Property::String
 	end
 
@@ -54,13 +47,16 @@ feature "In order to see what people have to say as a maker I want to see all pe
 
 	scenario "The homepage displays peeps" do
 		visit '/'
-		message1 = "ohman"
-		message2 = "sigh..."
 		sign_up
-		post_peep(message1)
-		post_peep(message2)
+		post_peep("ohman")
+		post_peep("sigh...")
 		expect(find('article:nth-child(1)')).to have_content("sigh...")
 	end
+
+	scenario "Only peeps authored by a specific user are displayed" do
+		
+	end
+
 
 
 end
