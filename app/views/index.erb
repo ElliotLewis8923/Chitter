@@ -4,17 +4,4 @@
 		<input type='submit' value='Post your peep!'>
 	</form>
 <% end %>
- <main id='list-peeps'>
- 	<ul>
- 		<% @peeps.each do |peep| %>
- 			<article class='each-peep'>
-	 			<li>
-	 				<h1></h1>
-	 					<a href="/users/search/<%= peep.user.username %>"><%= peep.user.username %>:</a>
-	 					<%= peep.text %>
-	 					<em><%= peep.time %></em>
-	 			</li>
-	 		</article>
-	 	<% end %>
-	 </ul>
-</main>
+<%= erb :display_peeps %>

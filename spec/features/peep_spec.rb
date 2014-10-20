@@ -60,9 +60,19 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		sign_out
 		sign_up2
 		post_peep("aaaaaaaargh")
-		click_link "hashswagbrolo"
+		click_link "@hashswagbrolo"
 		expect(page).to have_content "asfasfd"
 		expect(page).not_to have_content "aaaaaaaargh"
+	end
+
+	scenario "Only peeps with a specific hashtag are displayed" do
+		visit '/'
+		sign_up
+		post_peep("dadadada #moomoomoomoo")
+		post_peep("asdf")
+		click_link "#moomoomoomoo"
+		expect(page).to have_content "dadadada"
+		expect(page).not_to have_content "asdf"
 	end
 
 

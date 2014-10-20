@@ -2,6 +2,7 @@ require 'sinatra/base'
 require 'capybara/rspec'
 require 'data_mapper'
 require 'rack-flash'
+require 'sinatra/partial'
 
 require_relative './models/peep'
 require_relative './models/user'
@@ -71,13 +72,20 @@ class Server < Sinatra::Base
                          :text => text,
                          :time => time)
     parse_hashtags(@peep)
+    render_hashtags(@peep)
     redirect to '/'
   end
 
-  get '/users/search/:username' do
-     @user = User.first(:username => params[:username])
+  get '/users/search/:id' do
+     @user = User.get(params[:id])
      @peeps = Peep.all(:user_id => @user.id)
-     erb :index
+     erb :users
+  end
+
+  get '/hashtags/search/:id' do
+    @hashtag = Hashtag.get(params[:id])
+    @peeps = @hashtag.peeps.all
+    erb :hashtags
   end
 
  	def current_user
@@ -87,8 +95,19 @@ class Server < Sinatra::Base
   def parse_hashtags(peep)
     @peep = peep
     text = peep.text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!
-    text ? ( text.map { |e| h = h = Hashtag.first_or_create(:name => e), h.peeps = [@peep] } ) :
-    nil
+    @hashtags = []
+    text ? (text.map { |e| h = Hashtag.first_or_create(:name => e); 
+      h.peeps << @peep; 
+      @peep.hashtags << h; 
+      @peep.save!; 
+        h.save! }) 
+    : nil
+  end
+
+  def render_hashtags(peep)
+    @peep = peep
+    @peep.hashtags.each { |h| @peep.text = @peep.text.gsub(/\#(#{h.name})/, "<a href='/hashtags/search/#{h.id}'>##{h.name}</a>") } 
+    @peep.save!
   end
 
 

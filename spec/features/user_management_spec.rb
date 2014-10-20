@@ -16,7 +16,7 @@ feature "In order to user chitter as a maker I want to log in" do
 	scenario 'signing in' do
 		visit '/'
 		sign_up
-		expect(page).to have_content('Welcome, hashswagbrolo!')
+		expect(page).to have_content('Signed in as hashswagbrolo!')
 	end
 
 end
