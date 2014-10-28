@@ -1,0 +1,13 @@
+<main id='list-peeps'>
+ 	<ul>
+ 		<% @peeps.each do |peep| %>
+ 			<article class='each-peep'>
+	 			<li>
+	 					<a href="/users/search/<%= peep.user.id %>">@<%= peep.user.username %></a>
+	 					<%= peep.text %>
+	 					<span class='timestamp'><%= peep.time %></em></span>
+	 			</li>
+	 		</article>
+	 	<% end %>
+	 </ul>
+</main>

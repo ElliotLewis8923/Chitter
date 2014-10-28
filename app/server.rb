@@ -7,6 +7,7 @@ require 'sinatra/partial'
 require_relative './models/peep'
 require_relative './models/user'
 require_relative './models/hashtag'
+require_relative './helpers/hashtag_collector'
 
 
 class Server < Sinatra::Base
@@ -27,6 +28,8 @@ class Server < Sinatra::Base
 
 	use Rack::Flash
 
+  include HashtagCollector
+
  
 
   get '/' do
@@ -35,7 +38,7 @@ class Server < Sinatra::Base
     erb :index
   end
 
-  post '/' do
+  post '/sessions' do
   	@account = User.new( :email => params[:email],
   										:password => params[:password],
   										:password_confirmation => params[:password_confirmation],
@@ -72,7 +75,7 @@ class Server < Sinatra::Base
                          :text => text,
                          :time => time)
     parse_hashtags(@peep)
-    render_hashtags(@peep)
+    #render_hashtags(@peep)
     redirect to '/'
   end
 
@@ -91,25 +94,6 @@ class Server < Sinatra::Base
  	def current_user
 			@current_user ||=User.get(session[:id]) if session[:id]
 	end
-
-  def parse_hashtags(peep)
-    @peep = peep
-    text = peep.text.scan(/(?:\s|^)(?:#(?!\d+(?:\s|$)))(\w+)(?=\s|$)/i).flatten!
-    @hashtags = []
-    text ? (text.map { |e| h = Hashtag.first_or_create(:name => e); 
-      h.peeps << @peep; 
-      @peep.hashtags << h; 
-      @peep.save!; 
-        h.save! }) 
-    : nil
-  end
-
-  def render_hashtags(peep)
-    @peep = peep
-    @peep.hashtags.each { |h| @peep.text = @peep.text.gsub(/\#(#{h.name})/, "<a href='/hashtags/search/#{h.id}'>##{h.name}</a>") } 
-    @peep.save!
-  end
-
 
   # start the server if ruby file executed directly
   run! if app_file == $0
