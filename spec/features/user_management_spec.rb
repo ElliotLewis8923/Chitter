@@ -31,3 +31,34 @@ feature "In order to avoid others to use my account as a maker I want to log out
 	end
 
 end
+
+feature "In order to connect with other users, I want to follow and unfollow" do
+
+	before(:each) do
+		visit '/'
+		sign_up
+		post_peep('testpeep')
+		sign_up2
+	end
+
+	scenario 'following' do
+		expect(page).not_to have_content 'testpeep'
+		visit '/hashswagbrolo'
+		click_link 'follow'
+		visit '/'
+		expect(page).to have_content 'testpeep'
+	end
+
+	scenario 'unfollowing' do
+		visit '/hashswagbrolo'
+		click_link 'follow'
+		expect(page).to have_content 'testpeep'
+		visit '/hashswagbrolo'
+		click_link 'unfollow'
+		expect(page).not_to have_content 'testpeep'
+	end
+
+
+
+
+end

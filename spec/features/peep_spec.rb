@@ -52,7 +52,7 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		expect(find('article:nth-child(1)')).to have_content("sigh...")
 	end
 
-	scenario "Only peeps authoured by a specific user are displayed" do
+	scenario "Only peeps authoured by a specific user are searched displayed" do
 		post_peep("asfasfd")
 		post_peep("waaah")
 		sign_up2
@@ -63,7 +63,7 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		expect(page).not_to have_content "aaaaaaaargh"
 	end
 
-	scenario "Only peeps with a specific hashtag are displayed" do
+	scenario "Only peeps with a specific hashtag are searched and displayed" do
 		post_peep("dadadada #moomoomoomoo")
 		post_peep("asdf")
 		sign_out
@@ -72,7 +72,9 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		expect(page).not_to have_content "asdf"
 	end
 
-	scenario "Only the user's followers' peeps are displayed" do
+	scenario
+
+	scenario "Only the user's followers' peeps are displayed on the homepage" do
 		post_peep("followed peep #suchmanytomany")
 		sign_up2
 		expect(page).not_to have_content "followed peep #suchmanytomany"
