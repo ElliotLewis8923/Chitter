@@ -1,5 +1,9 @@
   get '/' do
-    @peeps = Peep.all
-    @peeps.reverse!
-    erb :index
-  end
+  	if current_user
+  		@peeps = User.get(session[:id]).followed_users.peeps
+  	else
+    	@peeps = Peep.all
+    	@peeps.reverse!
+	end
+	erb :index
+end

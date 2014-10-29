@@ -16,7 +16,7 @@ module HashtagCollector
     end
 
     def render_hashtags(data)
-      data.hashtags.each { |e| data.text = data.text.gsub(/\#(#{e.name})/, "<a href='/hashtags/search/#{e.id}'>##{e.name}</a>") } 
+      data.hashtags.each { |e| data.text = data.text.gsub(/\#(#{e.name})/, "<a href='/hashtags/#{e.id}'>##{e.name}</a>") } 
       data.save!
     end
 

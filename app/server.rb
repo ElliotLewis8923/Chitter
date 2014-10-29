@@ -14,6 +14,7 @@ require_relative 'controllers/index'
 require_relative 'controllers/peeps'
 require_relative 'controllers/sessions'
 require_relative 'controllers/users'
+require_relative 'controllers/follow'
 
 include HashtagCollector
 
