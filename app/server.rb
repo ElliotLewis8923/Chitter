@@ -8,6 +8,11 @@ require_relative './models/peep'
 require_relative './models/user'
 require_relative './models/hashtag'
 require_relative './helpers/hashtag_collector'
+require_relative './controllers/hashtags'
+require_relative './controllers/index'
+require_relative './controllers/peeps'
+require_relative './controllers/sessions'
+require_relative './controllers/users'
 
 
 class Server < Sinatra::Base
@@ -66,7 +71,7 @@ class Server < Sinatra::Base
  		end
  	end
 
-  post '/peep' do
+  post '/peeps' do
     text = params[:peep]
     time = Time.now
     time = time.strftime("Posted at %H:%M, on %d/%m/%Y")
@@ -75,7 +80,6 @@ class Server < Sinatra::Base
                          :text => text,
                          :time => time)
     parse_hashtags(@peep)
-    #render_hashtags(@peep)
     redirect to '/'
   end
 

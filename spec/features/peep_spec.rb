@@ -57,10 +57,12 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		visit '/'
 		sign_up
 		post_peep("asfasfd")
+		post_peep("waaah")
 		sign_out
 		sign_up2
 		post_peep("aaaaaaaargh")
-		click_link "@hashswagbrolo"
+		#find('ul:first-child')
+		click_link('@hashswagbrolo', match: :first)
 		expect(page).to have_content "asfasfd"
 		expect(page).not_to have_content "aaaaaaaargh"
 	end
