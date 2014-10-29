@@ -13,7 +13,7 @@ DataMapper.finalize.auto_migrate!
 DataMapper.auto_upgrade!
 
 
-Capybara.app = Server
+Capybara.app = Sinatra::Application
 
 
 
