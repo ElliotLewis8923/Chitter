@@ -72,14 +72,12 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		expect(page).not_to have_content "asdf"
 	end
 
-	scenario
-
 	scenario "Only the user's followers' peeps are displayed on the homepage" do
 		post_peep("followed peep #suchmanytomany")
 		sign_up2
 		expect(page).not_to have_content "followed peep #suchmanytomany"
-		visit '/hashswagbrolo'
-		click_link 'follow'
+		visit '/users/hashswagbrolo'
+		click_button 'follow'
 		expect(page).to have_content "followed peep #suchmanytomany"	
 	end	
 

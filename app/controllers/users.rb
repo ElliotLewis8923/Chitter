@@ -1,5 +1,5 @@
-  get '/:id' do
-     @user = User.first(:username => params[:id])
-     @peeps = Peep.all(:user_id => @user.id)
+  get '/users/:username' do
+     @user = User.first(:username => params[:username])
+     @peeps = Peep.all(:user => @user)
      erb :users
   end

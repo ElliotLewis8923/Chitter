@@ -3,7 +3,7 @@
  		<% @peeps.each do |peep| %>
  			<article class='each-peep'>
 	 			<li>
-	 					<a href="/<%= peep.user.username %>" class='peep-username'><b>@<%= peep.user.username %></b></a>
+	 					<a href="/users/<%= peep.user.username %>" class='peep-username'><b>@<%= peep.user.username %></b></a>
 	 					<%= peep.text %>
 	 					<span class='timestamp'><em><%= peep.time %></em></span>
 	 			</li>

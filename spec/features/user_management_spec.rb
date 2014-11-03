@@ -43,18 +43,19 @@ feature "In order to connect with other users, I want to follow and unfollow" do
 
 	scenario 'following' do
 		expect(page).not_to have_content 'testpeep'
-		visit '/hashswagbrolo'
-		click_link 'follow'
+		visit '/users/hashswagbrolo'
+		click_button 'follow'
 		visit '/'
 		expect(page).to have_content 'testpeep'
 	end
 
 	scenario 'unfollowing' do
-		visit '/hashswagbrolo'
-		click_link 'follow'
+		visit '/users/hashswagbrolo'
+		click_button 'follow'
 		expect(page).to have_content 'testpeep'
-		visit '/hashswagbrolo'
-		click_link 'unfollow'
+		visit '/users/hashswagbrolo'
+		click_button 'unfollow'
+		visit '/'
 		expect(page).not_to have_content 'testpeep'
 	end
 

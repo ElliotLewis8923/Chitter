@@ -1,9 +1,9 @@
   get '/' do
   	if current_user
-  		@peeps = User.get(session[:id]).followed_users.peeps
+  		@peeps = current_user.followed_users.peeps
   	else
     	@peeps = Peep.all
-    	@peeps.reverse!
 	end
+	@peeps.reverse!
 	erb :index
 end

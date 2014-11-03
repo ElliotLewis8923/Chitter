@@ -1,10 +1,17 @@
 require 'database_cleaner'
 require './app/server'
 
+task :clean_db do
+	ENV["RACK_ENV"] = 'development'
+	    DatabaseCleaner.strategy = :transaction
+    	DatabaseCleaner.clean_with(:truncation)
+	    DatabaseCleaner.start
+	    DatabaseCleaner.clean
+	puts "Database cleansing completed!"
+end
 
-ENV["RACK_ENV"] = 'development'
-
-task :clean_database do
+task :clean_test_db do
+	ENV["RACK_ENV"] = 'test'
 	    DatabaseCleaner.strategy = :transaction
     	DatabaseCleaner.clean_with(:truncation)
 	    DatabaseCleaner.start
