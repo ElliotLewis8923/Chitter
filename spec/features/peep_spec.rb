@@ -79,7 +79,7 @@ feature "In order to see what people have to say as a maker I want to see all pe
 		visit '/users/hashswagbrolo'
 		click_button 'follow'
 		expect(page).to have_content "followed peep #suchmanytomany"	
-	end	
+	end
 
 
 

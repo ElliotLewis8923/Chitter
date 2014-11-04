@@ -58,8 +58,22 @@ feature "In order to connect with other users, I want to follow and unfollow" do
 		visit '/'
 		expect(page).not_to have_content 'testpeep'
 	end
+end
 
+feature "In order to network, I want to see users followers and following" do
 
+	before(:each) do
+		visit '/'
+		sign_up
+		post_peep('testpeep')
+		sign_up2
+	end
+
+	scenario 'followers' do
+		visit '/users/hashswagbrolo'
+		click_button 'follow'
+		expect(page).to have_content 'bunchie'
+	end
 
 
 end
