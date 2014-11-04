@@ -67,13 +67,16 @@ feature "In order to network, I want to see users followers and following" do
 		sign_up
 		post_peep('testpeep')
 		sign_up2
+		visit '/users/hashswagbrolo'
+		click_button 'follow'
 	end
 
 	scenario 'followers' do
-		visit '/users/hashswagbrolo'
-		click_button 'follow'
 		expect(page).to have_content 'bunchie'
 	end
 
-
+	scenario 'following' do
+		visit '/users/bunchie'
+		expect(page).to have_content 'hashswagbrolo'
+	end
 end
