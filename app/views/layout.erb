@@ -6,39 +6,18 @@
 	<title>Chitter</title>
 </head>
 <body>
-<header>
-	<a href='/'>Chitter</a>
-	<% if current_user %>
-		<h3>Signed in as @<%= current_user.username %></h3>
-		<form method='post' action='/sessions' class='signout-form'>
-			<input type='hidden' name='_method' value='delete'>
-			<input type='submit' value='Sign out'>
-		</form>
-	<% end %>
-</header>
-	<% if current_user == nil %>
-		<aside class='forms' id='session-forms'>
-			<p>Don't have an account? Enter your details to sign up.</p>
-			<form action='/sessions' method='post' class='signup'>
-				<input type='text' name='email' placeholder='Email'>
-				<input type='password' name='password' placeholder='Password'>
-				<input type='password' name='password_confirmation' placeholder='Confirm password'>
-				<input type='text' name='username' placeholder='Username'>
-				<div class='button-wrapper'>
-					<button type='submit'>Sign up</button>
-				</div>
+	<header>
+		<a href='/'>Chitter</a>
+		<% if current_user %>
+			<h3>Signed in as @<%= current_user.username %></h3>
+			<form method='post' action='/sessions' class='signout-form'>
+				<input type='hidden' name='_method' value='delete'>
+				<input type='submit' value='Sign out'>
 			</form>
-			<form action='/sessions/new' method='post' class='signin-form'>
-				<p>Already a registered user? Sign in here.</p>
-				<input type='text' name='email_login' placeholder='Email'>
-				<input type='password' name='password_login' placeholder='Password'>
-				<div class='button-wrapper'>
-					<button type='submit'>Sign in</button>
-				</div>
-			</form>
-		</aside>
-	<% end %>
-<%= yield %>
+		<% end %>
+	</header>
+	<%= erb :sessions_forms %>
+	<%= yield %>
 </body>
 </html>
 

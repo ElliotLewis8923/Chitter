@@ -1,7 +1,7 @@
   post '/peeps' do
     text = params[:peep]
     time = Time.now
-    time = time.strftime("Posted at %H:%M, on %d/%m/%Y")
+    time = time.strftime("%H:%M, %d/%m/%Y")
     @peep = Peep.create( :user => User.get(session[:id]),
                          :user_id => session[:id],
                          :text => text,
