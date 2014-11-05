@@ -76,6 +76,7 @@ feature "In order to network, I want to see users followers and following" do
 	end
 
 	scenario 'following' do
+		sign_out
 		visit '/users/bunchie'
 		expect(page).to have_content 'hashswagbrolo'
 	end
