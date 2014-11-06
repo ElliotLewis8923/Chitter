@@ -1,6 +1,6 @@
 <% if current_user == nil %>
 	<aside class='forms' id='session-forms'>
-		<p class='sessions-text'>Don't have an account? Enter your details to sign up.</p>
+		<p class='sessions-text'>Don't have an account? Enter your details to <strong>sign up.</strong></p>
 		<section class='sessions-inputs'>
 			<form action='/sessions' method='post' class='signup'>
 				<input type='text' name='email' placeholder='Email'>
@@ -12,7 +12,7 @@
 				</div>
 			</form>
 		</section>
-		<p class='sessions-text'>Already a registered user? Sign in here.</p>
+		<p class='sessions-text'>Already a registered user? <strong>Sign in here.</strong></p>
 		<section class='sessions-inputs'>
 			<form action='/sessions/new' method='post' class='signin-form'>
 				<input type='text' name='email_login' placeholder='Email'>

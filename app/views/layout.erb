@@ -6,8 +6,9 @@
 	<title>Chitter</title>
 </head>
 <body>
+<main class='body-wrapper'>
 	<header>
-		<a href='/'>Chitter</a>
+		<a href='/' class='logo'>Chitter</a>
 		<% if current_user %>
 			<h3>Signed in as @<%= current_user.username %></h3>
 			<form method='post' action='/sessions' class='signout-form'>
@@ -18,6 +19,7 @@
 	</header>
 	<%= erb :sessions_forms %>
 	<%= yield %>
+</main>
 </body>
 </html>
 

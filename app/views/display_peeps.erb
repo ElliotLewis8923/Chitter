@@ -1,15 +1,22 @@
-<main class='list-peeps'>
- 	<ul>
- 		<% @peeps.each do |peep| %>
- 			<article class='each-peep'>
- 				<section class='peep-text'>
-		 			<li>
-		 					<a href="/users/<%= peep.user.username %>" class='peep-username'><b>@<%= peep.user.username %></b></a>
-		 				<%= peep.text %>
-		 		</section>
-	 					<span class='timestamp'><em><%= peep.time %></em></span><br>
-	 				</li>
-	 		</article>
-	 	<% end %>
-	 </ul>
+<main class='list-peeps-wrapper'>
+	<div class='list-peeps'>
+		<h2 class='peeps-heading'><% if current_user %>
+			<%= @peeps_heading %>
+		<% else %>
+			Latest peeps
+		<% end %></h2 class='peeps-heading'>
+	 	<ul>
+	 		<% @peeps.each do |peep| %>
+	 			<article class='each-peep'>
+	 				<section class='peep-text'>
+			 			<li>
+			 					<a href="/users/<%= peep.user.username %>" class='peep-username'><b>@<%= peep.user.username %></b></a>
+			 				<%= peep.text %>
+			 		</section>
+		 					<span class='timestamp'><em><%= peep.time %></em></span><br>
+		 				</li>
+		 		</article>
+		 	<% end %>
+		 </ul>
+	</div>
 </main>

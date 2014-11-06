@@ -1,20 +1,19 @@
-body {
+html, body {
 	background-image: url("../img/capybara.jpg");
 	font-family: "HelveticaNeue";
 	font-size: 20px;
 	padding: 0px;
 	margin: 0px;
+	overflow: auto;
+	background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 header {
 	background-color: white;
 	margin: 0px;
 	padding: 0px;
-}
-
-header a {
-	font-size: 60px;
-	color: brown;
+	position: relative;
 }
 
 a {
@@ -30,12 +29,14 @@ h3 {
 }
 
 input {
-	margin: 3px;
+	margin: 5px;
 	padding: 1px;
-	border-radius: 3px;
+	border-radius: 5px;
 	border: 1px solid black;
 	font-weight: normal;
 	font-size: 20px;
+	background-color: #f2f2f2;
+	color: black;
 }
 
 button {
@@ -49,21 +50,40 @@ button {
 	font-size: 20px;
 }
 
-.button-wrapper {
-	margin: auto;
-	text-align: center;
-	margin: 5px;
+
+
+.logo {
+	font-size: 80px;
+	font-weight: 600;
+	color: brown;
+	position: relative;
+	left: 50px;
+	letter-spacing: 3px;
 }
 
 .forms {
 	position: fixed;
-	right: 80px;
-	top: 100px;
-	border: white 2px solid;
-	background-color: white;
-	border-radius: 10px;
+	right: -10px;
+	top: 130px;
+	background-color: rgba(255,255,255,0.7);
+	border-radius: 12px;
 	width: 250px;
 	padding: 10px;
+}
+
+.list-peeps {
+	background-color: rgba(255,255,255,0.7);
+	display: inline-block;
+	text-align: left;
+	border-radius: 15px;
+	padding: 5px;
+	position: relative;
+	top: 30px;
+	width: 500px;
+}
+
+.list-peeps-wrapper {
+  	text-align: center;
 }
 
 .signout-form {
@@ -72,22 +92,18 @@ button {
 	right:30px;
 }
 
-.list-peeps {
-	background-color: white;
-	display: inline-block;
-	text-align: left;
-	border-radius: 15px;
-	padding: 15px;
-	position: fixed;
-	top: 100px;
-	left: 100px;
-	width: 500px;
+.button-wrapper {
+	margin: auto;
+	text-align: center;
+	margin: 5px;
 }
 
 .peep-text {
-	background-color: #ddd;
+	background-color: #f2f2f2;
 	border-radius: 5px;
 	display: inline-block;
+	text-align: left;
+	margin: 2px;
 }
 
 .timestamp {
@@ -97,6 +113,7 @@ button {
 
 .each-peep {
 	margin: 15px;
+	opacity: 1;
 }
 
 .peep-username {
@@ -107,18 +124,31 @@ button {
 	color: #C97F7F;
 }
 
-.sessions-inputs {
+.sessions-inputs {§
 	text-align: center;
 }
 
 .sessions-text {
-	margin: 18px;
+	margin: 10px;
 	color: brown;
+}
+
+.body-wrapper {
+	height: 100%;
+}
+
+.peeps-heading {
+	color: brown;
+	text-align: center;
+	font-weight: bold;
+	font-size: 40px;
 }
 
 ul {
 	list-style-type: none;
 	padding: 0px;
+	height: 100%;
+
 }
 
 li {
