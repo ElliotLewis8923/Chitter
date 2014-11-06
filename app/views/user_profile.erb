@@ -2,10 +2,18 @@
 	<%= @user.username %>
 	<p>Followers</p>
 	<div class='followers'>
-		<% @user.follower.each do |following| %>
+		<% @user.follower.each do |followers| %>
+			<%= followers.username %>
+		<% end %>
+	</div>
+	<p>Following</p>
+	<div class='following'>
+		<% @user.following.each do |following| %>
 			<%= following.username %>
 		<% end %>
 	</div>
+	<div class='peep-count'>
+		Peep count: <%= @user.peeps.count %>
 	<% if current_user %>
 		<form method='post' action="/follow/<%= @user.id %>">
 			<button type='submit'>follow</button>

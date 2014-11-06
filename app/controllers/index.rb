@@ -1,6 +1,6 @@
   get '/' do
   	if current_user
-  		@peeps = current_user.follower.peeps
+  		@peeps = current_user.following.peeps
   	else
     	@peeps = Peep.all
 	end
