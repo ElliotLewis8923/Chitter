@@ -8,15 +8,12 @@ require './spec/features/helpers/post_peep'
 require './spec/features/helpers/sign_out'
 require 'rack-flash'
 
-DataMapper.finalize.auto_migrate!
-DataMapper.auto_upgrade!
-
 Capybara.app = Sinatra::Application
 
 RSpec.configure do |config|
 
- config.filter_run :focus
- config.run_all_when_everything_filtered = true
+ # config.filter_run :focus
+ # config.run_all_when_everything_filtered = true
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction

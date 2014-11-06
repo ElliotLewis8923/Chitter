@@ -7,11 +7,11 @@ class User
 	 
 	    include DataMapper::Resource
 	 
-	    storage_names[:default] = 'users_links'
+	    #storage_names[:default] = 'users_links'
+	 
+	    belongs_to :following, 'User', :key => true
 	 
 	    belongs_to :follower, 'User', :key => true
-	 
-	    belongs_to :followed, 'User', :key => true
 	 
 	end
 
@@ -27,16 +27,16 @@ class User
 
 		has n, :peeps, :through => Resource
 
-		has n, :links_to_followed_users, 'User::Link', :child_key => [:follower_id]
+		has n, :links_to_following, 'User::Link', :child_key => [:follower_id]
  
-		has n, :links_to_followers, 'User::Link', :child_key => [:followed_id]
+		has n, :links_to_follower, 'User::Link', :child_key => [:following_id]
 		 
-		has n, :followed_users, self,
-		     :through => :links_to_followed_users, 
-		     :via     => :followed
+		has n, :following, self,
+		     :through => :links_to_following, 
+		     :via     => :following
 		 
-		has n, :followers, self,
-		     :through => :links_to_followers,
+		has n, :follower, self,
+		     :through => :links_to_follower,
 		     :via     => :follower
 
 		property :id, Serial
@@ -47,13 +47,13 @@ class User
 		property :password_token_timestamp, Text, :lazy => false
 
 	def follow(others)
-    	followed_users.concat(Array(others))
+    	following.concat(Array(others))
      	save
      	self
 	end
 
 	def unfollow(others)
-	    links_to_followed_users.all(:followed => Array(others)).destroy!
+	    links_to_following.all(:following => Array(others)).destroy!
 	    reload
 	    self
 	end

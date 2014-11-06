@@ -1,0 +1,18 @@
+<section class='user-profile'>
+	<%= @user.username %>
+	<p>Followers</p>
+	<div class='followers'>
+		<% @user.follower.each do |following| %>
+			<%= following.username %>
+		<% end %>
+	</div>
+	<% if current_user %>
+		<form method='post' action="/follow/<%= @user.id %>">
+			<button type='submit'>follow</button>
+		</form>
+		<form method='post' action="/unfollow/<%= @user.id %>">
+			<input type="hidden" name="_method" value="delete">
+			<button type='submit'>unfollow</button>
+		</form>
+	<% end %>
+</section>

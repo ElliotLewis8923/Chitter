@@ -1,12 +1,2 @@
-<%= @user.username %>
-<% @user.followed_users.each do |following| %>
-<%= following.username %>
-<% end %>
-<form method='post' action="/follow/<%= @user.id %>">
-	<button type='submit'>follow</button>
-</form>
-<form method='post' action="/unfollow/<%= @user.id %>">
-	<input type="hidden" name="_method" value="delete">
-	<button type='submit'>unfollow</button>
-</form>
 <%= erb :display_peeps %>
+<%= erb :user_profile %>

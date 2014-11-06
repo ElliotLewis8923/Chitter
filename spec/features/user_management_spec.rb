@@ -60,7 +60,7 @@ feature "In order to connect with other users, I want to follow and unfollow" do
 	end
 end
 
-feature "In order to network, I want to see users followers and following" do
+feature "In order to network, I want to see a user's profile" do
 
 	before(:each) do
 		visit '/'
@@ -71,13 +71,20 @@ feature "In order to network, I want to see users followers and following" do
 		click_button 'follow'
 	end
 
-	scenario 'followers' do
+	scenario "user's followers" do
 		expect(page).to have_content 'bunchie'
 	end
 
-	scenario 'following' do
+	scenario 'people a user is following' do
 		sign_out
 		visit '/users/bunchie'
 		expect(page).to have_content 'hashswagbrolo'
+	end
+
+	scenario "the user's peep count" do
+		visit '/'
+		post_peep('peepypoopy')
+		visit '/users/bunchie'
+		expect(page).to have_content 'Peep count: 1'
 	end
 end

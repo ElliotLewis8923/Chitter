@@ -1,10 +1,8 @@
 <main class='list-peeps-wrapper'>
 	<div class='list-peeps'>
-		<h2 class='peeps-heading'><% if current_user %>
+		<h2 class='peeps-heading'>
 			<%= @peeps_heading %>
-		<% else %>
-			Latest peeps
-		<% end %></h2 class='peeps-heading'>
+		</h2 class='peeps-heading'>
 	 	<ul>
 	 		<% @peeps.each do |peep| %>
 	 			<article class='each-peep'>
